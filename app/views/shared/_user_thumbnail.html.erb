@@ -1,0 +1,7 @@
+<%= link_to user, class: 'user-mini-thumbnail' do %>
+    <%= avatar(user, :thumb, 'img-responsive img-thumbnail small-profile-picture') %>
+    <div class="user-mini-container-name"><%= user.full_name %></div>
+<% end %>
+<%= link_to new_relationship_path(relationship: {user_id: current_user.id, target_id: user.id}), { class: "user-mini-remove", remote: true } do %>
+   <i class="glyphicon glyphicon-plus"></i>
+<% end if policy(Relationship.new(user: current_user, target: user)).new? %>

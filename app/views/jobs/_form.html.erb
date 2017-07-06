@@ -1,0 +1,25 @@
+<%= form_for [@user, Job.new], method: :post, class: 'form-inline', remote: true do |f| %>
+  <div class="create panel job panel-default">
+    <div class="panel-heading">
+      <%= f.label :title, (t'.job_title') %>
+      <%= f.text_field :title, class: 'form-control input-sm', placeholder: (t'.new_job_title'), required: true %>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="form-group col-md-12">
+          <%= f.label :start_date, (t'.dates') %><br>
+          <%= render "shared/inputs/dates", f: f %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :location, (t'.location') %>
+        <%= f.text_field :location, class: 'form-control input-sm', placeholder: (t'.job_location'), required: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :description, (t'.description') %>
+        <%= f.text_field :description, class: 'form-control input-sm', placeholder: (t'.job_description'), required: true %>
+      </div>
+      <%= submit_tag (t'.submit_job'), class: 'btn btn-primary btn-sm js-submit-job' %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,21 @@
+<% @users.first(5).each do |user| %>
+  <li class="list-group-item result_box" data-user-slug="<%= user.slug %>"  >
+    <%= link_to user_path(user), style: "text-decoration: none;" do %>
+    <div class="row">
+      <div class="col-md-2">
+        <%= avatar(user, :thumb, 'img-responsive img-thumbnail small-profile-picture') %>
+      </div>
+      <div class="col-md-10">
+        <b><%= user.full_name %></b><br>
+        <%= user.entity %><br>
+        <%= relationship_labels(current_user.relationship_with(user).kind) if current_user.has_relation_with?(user) %>
+      </div>
+    </div>
+    <% end %>
+  </li>
+<% end %>
+<%= link_to "#", :onclick => "$('#user_search').submit()" do %>
+  <li class="list-group-item result_box">
+    <%= t'profiles.search_results.search_all_terms' %>
+  </li>
+<% end %>

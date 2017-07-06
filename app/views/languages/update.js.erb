@@ -1,0 +1,6 @@
+$("#flash-messages").html("<%= escape_javascript(render partial: 'shared/flash_messages') %>");
+$("#languages").html("<%= escape_javascript(render partial: 'languages/languages_list', locals: { languages: @user.languages }) %>");
+
+$('#new_language').each(function () {
+  this.reset();
+});

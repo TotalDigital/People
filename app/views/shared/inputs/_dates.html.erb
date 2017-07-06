@@ -1,0 +1,16 @@
+<%= f.hidden_field :start_date, class: "js-start-date" %>
+<%= f.select :start_date_year, year_collection, { selected: f.object.start_date.try(:year) }, { class: "input-sm js-start-year" } %>
+<%= f.select :start_date_month, month_collection, { selected: f.object.start_date.try(:month) }, { class: "input-sm js-start-month" }  %>
+-
+<span class="end-date">
+  <span class="end-dates <%= 'hidden' unless f.object.end_date.present? %>">
+    <%= f.hidden_field :end_date, class: "js-end-date" %>
+    <%= f.select :end_date_year, year_collection, { selected: f.object.end_date.try(:year) }, { class: "input-sm js-end-year" } %>
+    <%= f.select :end_date_month, month_collection, { selected: f.object.end_date.try(:month) }, { class: "input-sm js-end-month" } %>
+  </span>
+
+  <label>
+    <%= f.check_box :current, {class: "js-current-end-date"}, true, false %>
+    <%= t('date.current') %>
+  </label>
+</span>

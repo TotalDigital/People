@@ -1,0 +1,14 @@
+$('#modal-window').modal('hide').html('');
+$('#flash-messages').html("<%= escape_javascript(render partial: 'shared/flash_messages') %>");
+
+<% if @request_referrer_user %>
+  // Update relationships list
+  $("#relationships").html("<%= escape_javascript(render partial: 'relationships/relationships_list', locals: { user: @request_referrer_user }) %>");
+  <% if @request_referrer_user == @relationship.target %>
+    // Update relationship status on target's profile
+    $("#profile-relationship-label").html("<%= escape_javascript(add_or_remove_relationship_button(current_user, @relationship.target)) %>");
+  <% end %>
+<% else %>
+  // Update profile thumb in index list (welcome#index, profiles#index)
+  $("#index-profile-<%= @relationship.target.id %>").html("<%= escape_javascript(render partial: 'profiles/profile', locals: { user: @relationship.target}) %>");
+<% end %>

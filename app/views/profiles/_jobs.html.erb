@@ -1,0 +1,17 @@
+<div id="jobs" class="pod u-mtS">
+  <%= render partial: 'jobs/jobs_list', locals: { jobs: @user.jobs } %>
+</div>
+
+<% if policy(Job.new(user_id: @user.id)).new? %>
+
+  <div class="u-mvS u-txtCenter">
+    <button id="add-job-button" class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#job-form" aria-expanded="false" aria-controls="job-form">
+      <span class="glyphicon glyphicon-plus"></span> <%= t'.add_job'%>
+    </button>
+  </div>
+
+  <div class="collapse" id="job-form">
+    <%= render partial: 'jobs/form' %>
+  </div>
+
+<% end %>

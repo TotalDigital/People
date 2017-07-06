@@ -1,0 +1,33 @@
+<% if policy(user).update_profile? %>
+  <h4 class="panel-subTitle"><%= t 'profiles.relations.add_a_relation' %></h4>
+  <div id="relation-form" class="user-mini-container">
+    <%= form_tag new_relationship_path, method: :get, remote: true, class: 'form-inline' do %>
+      <%= hidden_field_tag "relationship[target_id]", "" %>
+      <%= hidden_field_tag "relationship[user_id]", user.id %>
+      <%= autocomplete_field_tag "term", "", autocomplete_users_path,
+                                 id_element:  '#relationship_target_id',
+                                 placeholder: (t 'profiles.relations.search_user_by_name'),
+                                 class:       'form-control input-sm',
+                                 id:          'js-autocompleteRelationTerm',
+                                 oninvalid:   "this.setCustomValidity('Please select a relation')" %>
+      <%= submit_tag (t 'profiles.relations.add'), class: 'btn btn-primary btn-sm', id: 'autocomplete-relation-submit' %>
+      <p class="u-mtXS">
+        <%= link_to (t '.advanced_search'), users_path %>
+      </p>
+    <% end %>
+  </div>
+<% end %>
+
+<% relationship_titles.each do |type, title| %>
+  <% if policy_scope(user.relationships).send(type).any? %>
+    <h4 class="panel-subTitle"><%= title %></h4>
+    <% policy_scope(user.relationships).send(type).each do |relationship| %>
+      <div class="user-mini-container">
+        <%= render 'shared/user_thumbnail', user: relationship.target, relationship: relationship %>
+        <%= link_to relationship, method: :delete, remote: true, format: :js, class: 'user-mini-remove' do %>
+          <i class="glyphicon glyphicon-remove"></i>
+        <% end if policy(relationship).destroy? %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

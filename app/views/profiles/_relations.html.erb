@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      <%= t'views.profile.relations' %>
+    </h3>
+    <div>
+      <%= link_to organigraph_path(@user), class: "btn btn-primary btn-sm" do %>
+        <span id="graph-button" class="glyphicon glyphicon-eye-open"></span> <%= t'.graph_view' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div id="relationships">
+      <%= render "relationships/relationships_list", user: @user %>
+    </div>
+  </div>
+</div>

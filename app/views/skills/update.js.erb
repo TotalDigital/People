@@ -1,0 +1,6 @@
+$("#flash-messages").html("<%= escape_javascript(render partial: 'shared/flash_messages') %>");
+$("#skills").html("<%= escape_javascript(render partial: 'skills/skills_list', locals: { skills: @user.skills }) %>");
+
+$('#new_skill').each(function () {
+  this.reset();
+});

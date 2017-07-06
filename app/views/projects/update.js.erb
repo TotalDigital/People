@@ -1,0 +1,8 @@
+$("#flash-messages").html("<%= escape_javascript(render partial: 'shared/flash_messages') %>");
+$("#projects").html("<%= escape_javascript(render partial: 'projects/project_participations_list', locals: { project_participations: @user.project_participations }) %>");
+
+$('#new_project_participation').each(function () {
+  this.reset();
+});
+
+$('#project-participation-form').collapse('hide');

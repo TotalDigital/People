@@ -1,0 +1,74 @@
+<div class="search">
+  <div class="container">
+    <h1 class="search-title"><%= t'.search_results', term: (params[:search].try(:[], :term) || (t".filters") )%></h1>
+  </div>
+</div>
+
+<div class="u-mtM">
+  <div class="container">
+    <div class="u-mbM">
+      <a class="btn btn-default" role="button" data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
+        <%= t'.show_filters' %>
+      </a>
+    </div>
+    <%= search_form_for @q do |f| %>
+      <div id="collapseFilters" class="collapse <%= 'in' if params[:q].present? %>">
+        <div class="pod pod--pbS">
+          <h2 class="pod-title">Filters</h2>
+          <div class="row row--narrow">
+            <div class="form-group col-md-3 col-sm-6">
+              <%= f.label (t'.first_name') %>
+              <%= f.search_field :first_name_cont, class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-3 col-sm-6">
+              <%= f.label (t'.last_name') %>
+              <%= f.search_field :last_name_cont, class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-3 col-sm-6">
+              <%= f.label (t'.job_title') %>
+              <%= f.search_field :job_title_cont, class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-3 col-sm-6">
+              <%= f.label (t'.entity') %>
+              <%= f.search_field :entity_cont, class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-3 col-sm-6">
+              <%= f.label (t'.location') %>
+              <%= f.search_field :office_address_or_projects_location_cont, class: 'form-control' %>
+            </div>
+            <div class="form-group col-md-3 col-sm-6 select2-parent">
+              <%= f.label (t'.skill'), class: 'label--block' %>
+              <%= f.select :skills_name_cont_any, Skill.all.map(&:name).sort_by!{ |e| e.downcase }, { include_blank: true }, class: 'js-multiSelect', multiple: "multiple" %>
+            </div>
+            <div class="form-group col-md-3 col-sm-6 select2-parent">
+              <%= f.label (t'.language'), class: 'label--block' %>
+              <%= f.select :languages_name_cont_any, Language.all.map(&:name).sort_by!{ |e| e.downcase }, { include_blank: true }, class: 'form-control js-multiSelect', multiple: "multiple" %>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <%= f.submit (t'.search'), class: 'btn btn-primary search-cta btn-block' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="u-mtM">
+      <% if @users.blank? %>
+        <div class="alert alert-warning alert--XL" role="alert">
+          <div class="glyphicon glyphicon-user"></div>
+          <h2 class="alert-title"><%= t'.no_results_found' %></h2>
+        </div>
+      <% else %>
+        <div class='profileList'>
+          <% @users.each do |user| %>
+            <div class="profile" id="index-profile-<%= user.id %>">
+              <%= render "profile", user: user %>
+            </div>
+          <% end %>
+        </div>
+        <div class="u-mtM text-center">
+          <%= paginate @users %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

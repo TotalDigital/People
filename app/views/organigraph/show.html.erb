@@ -1,0 +1,8 @@
+<div id="js-organigraph" data-controller="organigraph">
+  <div id="js-organigraph-cardContainer"></div>
+</div>
+
+<script>
+  window.organigraphCurrentUser = <%= @user.id %>;
+</script>
+<%= javascript_include_tag 'organigraph' %>

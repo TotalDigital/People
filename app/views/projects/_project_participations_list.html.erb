@@ -1,0 +1,39 @@
+<% @user.project_participations.order("start_date desc").each do |project_participation| %>
+
+  <div class="item">
+    <div class="item-header">
+      <% if policy(project_participation).destroy? %>
+        <%= link_to '', [@user, project_participation], method: :delete, class: 'pull-right glyphicon glyphicon-remove remove', remote: true %>
+      <% end %>
+      <h3 class="item-title">
+        <span>
+          <%= remote_input(project_participation.project, :name, [@user, project_participation.project]) %>
+        </span>
+      </h3>
+      <span class="glyphicon glyphicon-map-marker"></span>
+      <span>
+        <%= remote_input(project_participation.project, :location, [@user, project_participation.project]) %>
+      </span>
+    </div>
+    <div class="item-body">
+      <div class="item-legend">
+        <%= render 'shared/inputs/remote_dates', item: project_participation %>
+      </div>
+      <div class="item-legend">
+        <span>
+          <span class="glyphicon glyphicon-tag"></span>
+          <%= remote_input(project_participation, :role_description, [@user, project_participation], input_type: :text_area, label: t('projects.form.role_description')) %>
+        </span>
+      </div>
+      <div class="item-subTitle"><%= t'.project_members' %>&nbsp;:</div>
+      <div class="userGrid">
+        <% policy_scope(project_participation.participants).each do |user| %>
+          <div class="user-mini-container">
+            <%= render partial: 'shared/user_thumbnail', locals: { user: user } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+<% end %>

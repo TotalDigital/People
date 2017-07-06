@@ -1,0 +1,303 @@
+---
+fr:
+  admin:
+    actions:
+      import_users:
+        breadcrumb: Importer
+        menu: Importer
+        title: Importer
+      import_jobs:
+        breadcrumb: Importer
+        menu: Importer
+        title: Importer
+  date:
+    formats:
+      month_and_year: '%B %Y'
+    from: De
+    to: à
+    unknow: date inconnue
+    current: actuel
+  degrees:
+    create:
+      failure: Le diplôme n'a pas pu être ajouté
+      success: Le diplôme a bien été ajouté
+    destroy:
+      failure: Le diplôme n'a pas pu être supprimé
+      success: Le diplôme %{title} a bien été supprimé
+    form:
+      degree_title: Titre
+      entry_year: Année de début
+      graduation_year: Année du diplôme
+      school: Ecole
+      search_school_by_name: Recherche par nom
+      submit_degree: Ajouter diplôme
+    update:
+      success: Le diplôme a bien été mis à jour
+      failure: Le diplôme n'a pas pu être mis à jour
+  helpers:
+    application:
+      close: Fermer
+    page_entries_info:
+      more_pages:
+        display_entries: Afficher %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> sur un total de <b>%{total}</b>
+      one_page:
+        display_entries:
+          one: Afficher <b>1</b> %{entry_name}
+          other: Afficher <b>les %{count}</b> %{entry_name}
+          zero: Aucun %{entry_name} trouvé
+    relationships:
+      add_relation: Ajouter relation
+      add_relation_with: Ajouter %{person}
+      kinds:
+        is_assistant_of: assistant de
+        is_assisted_by: mon assistant
+        is_colleague_of: collègue
+        is_managed_by: manager
+        is_manager_of: membre d'équipe (N-1)
+      labels:
+        is_assistant_of: Assistant de
+        is_assisted_by: Assistant
+        is_colleague_of: Collègue
+        is_managed_by: Manager
+        is_manager_of: Membre d'équipe (N-1)
+      remove_relation: Supprimer relation
+  jobs:
+    create:
+      failure: Le job n'a pas pu être ajouté
+      success: 'Le job suivant a bien été ajouté : %{title}'
+    destroy:
+      success: 'Le job "%{title}" a bien été supprimé'
+    form:
+      dates: Dates
+      description: Description
+      end_date: Date de fin
+      job_description: Description du poste
+      job_location: Situation
+      job_title: Poste
+      location: Lieu
+      new_job_title: Nouveau poste
+      start_date: Date de début
+      submit_job: Ajouter emploi
+    update:
+      failure: Le job n'a pas pu être mis à jour
+      success: Le job a bien été mis à jour
+    import_list:
+      success:
+        zero: Aucun job n'a été importé
+        one: 1 job a été importé
+        other: "%{count} jobs ont été importés"
+      failure: Les jobs n'ont pas pu être importés
+      select_file: Veuillez sélectionner un fichier
+  guided_tour:
+    welcome_title: Bienvenue à %{app_name}
+    welcome_content: "Visite guidée de l'application, les crayons bleus vous permettent d'éditer les champs"
+    jobs_title: Section Jobs
+    jobs_content: Ajoutez vos expériences professionnelles ici.
+    projects_title: Section Projets
+    projects_content: Trouvez un projet sur lequel vous avez travailler et ajouter votre participation ou créez un nouveau projet.
+    relations_title: Section Relations
+    relations_content: Cherchez vos collègues et ajoutez-les à votre réseau.
+    skills_title: Section Compétences
+    skills_content: Cherchez une compétence et ajoutez-la à votre profil.
+    languages_title: Section Langues
+    languages_content: Cherchez une langue et ajoutez-la à votre profil.
+    education_title: Section Education
+    education_content: Ajoutez vos diplômes
+    search_title: Recherche
+    search_content: Vous pouvez faire une recherche par n'importe quel critère (langue, compétence, projet,...)
+  language:
+    en: Anglais
+    fr: Français
+  languages:
+    create:
+      failure: La langue n'a pas pu être ajoutée
+      success: La langue %{language} a bien été ajoutée
+    destroy:
+      failure: La langue n'a pas pu être supprimée
+      success: La langue %{language} a bien été supprimée
+    form:
+      search_language_by_name: Recherche par nom
+      select_language: Choisir une langue
+      submit_language: Ajouter langue
+  onboarding:
+    index:
+      import_linkedin_profile: Importer profil LinkedIn
+      import_profile: Importer profil
+      internal_id_notice: identifiant interne ne sera pas visible publiquement
+      profile_imported: Profil importé
+      quetions_before_you_go: Quelques questions avant de commencer
+      save_and_continue: Sauver et continuer
+      select_file: Choisir fichier
+      upload_profile_picture: Ajouter photo de profil
+      whats_your_entity: Quelle est votre entité ?
+      whats_your_internal_id: Quel est votre identifiant interne ?
+      whats_your_job_title: Quel est votre poste ?
+      placeholders:
+        entity: ex. EP/SCR/TF-DIGITAL
+        internal_id: ex. J0123456
+        job_title: ex. Project Manager
+  pagination:
+    first: "&laquo; Première"
+    last: Dernière &raquo;
+    next: Suiv &rsaquo;
+    previous: "&lsaquo; Préc"
+    truncate: "&hellip;"
+  profiles:
+    search_results:
+      search_all_terms: Rechercher sur tous les critères
+    contact_info_labels:
+      internal_id: identifiant interne
+      phone: Numéro de téléphone
+      linkedin: Profil LinkedIn
+      twitter: Nom d'utilisateur Twitter
+      wat_link: Lien WAT
+      lync: Lync
+    contact_info_placeholders:
+      internal_id: J0123456
+      phone: "+33 6 12 34 56 78"
+      linkedin: "http://www.linkedin.com/"
+      twitter: "@utilisateur"
+      wat_link: ""
+      lync: ""
+    degrees:
+      add_degree: Ajouter diplôme
+      education: Cursus
+    destroy:
+      success: Votre profil a bien été supprimé
+      failure: Votre profil n'a pas pu être supprimé
+    form:
+      job_title: Titre
+      entity: Entité
+      office_address: Adresse bureau
+    import_list:
+      failure: Les profils n'ont pas pu être importés
+    index:
+      entity: Entité
+      first_name: Prénom
+      job_title: Poste
+      language: Langue
+      last_name: Nom
+      location: Lieu
+      no_results_found: Aucun résultat trouvé
+      search: Recherche
+      search_results: Résultats pour %{term}
+      filters: la recherche par filtres
+      show_filters: Afficher/Masquer filtres
+      skill: Compétence
+    informations:
+      contact_information: Informations de contact
+    jobs:
+      add_job: Add job
+    languages:
+      languages: Languages
+    profile:
+      external: External
+    projects:
+      add_project_participation: Ajouter participation au projet
+      projects: Projets
+    relations:
+      add: Ajouter
+      add_a_relation: Ajouter une relation
+      advanced_search: Recherche avancée
+      assistant: Assistant
+      assistant_of: Assistant de
+      colleagues: Collègues
+      graph_view: Organigraphe
+      managers: Managers
+      relations: Relations
+      search_user_by_name: Recherche par nom
+      team_members: Membres d'équipe
+    show:
+      entity: Entité
+      external: Externe
+      first_name: Prénom
+      job_title: Poste
+      last_name: Nom
+      office_address: Adresse du bureau
+      select_file: Sélectionner fichier
+      upload_new_picture: Sauver photo
+    skills:
+      skills: Compétences
+    update:
+      failure: Le profil n'a pas pu être mis à jour
+      success: Le profil a bien été mis à jour
+  project_participations:
+    create:
+      failure: La participation au projet n'a pas pu être ajoutée
+      success: La participation au projet %{name} a bien été ajoutée
+    destroy:
+      failure: Le projet %{name} n'a pas pu être supprimé
+      success: Le projet %{name} a bien été supprimé
+    update:
+      failure: La participation au projet n'a pas pu être mise à jour
+      success: La participation au projet a bien été mise à jour
+  projects:
+    form:
+      dates: Dates
+      project_end_date: Date de fin
+      project_location: Lieu
+      project_start_date: Date de début
+      role_description: Description du rôle
+      save_project_participation: Ajouter participation au projet
+      search_project_by_name: Recherche par nom de projet
+    project_participations_list:
+      project_members: Membres du projet
+    update:
+      failure: Le projet n'a pas pu être mis à jour
+      success: Le projet a bien été mis à jour
+  relationships:
+    create:
+      failure: La relation n'a pas pu être ajoutée
+      success: La relation avec %{name} a bien été ajoutée
+    create_dropdown:
+      add_a_relation: Ajouter une relation
+      remove_relation: Supprimer relation
+    destroy:
+      failure: La relation avec %{name} n'a pas pu être supprimée
+      success: La relation avec %{name} a bien été supprimée
+    form:
+      add: Ajouter
+      as_relation: En tant que %{relation}
+      close: Fermer
+      confirm: Confirmer nouvelle relation
+    new:
+      failure: Merci de sélectionner un contact avant de créer une nouvelle relation
+  shared:
+    date:
+      inputs:
+        start_and_end_dates: Dates de début et fin
+    header:
+      admin: Admin
+      edit_mode: 'Mode Edition : %{switch}'
+      graph_view: Organigraphe
+      profile: Profil
+      search: Chercher
+      search_for_anyone_anything: Recherche
+      settings: Paramètres
+    search_form:
+      search: Search
+      search_for_anyone_anything: Recherchez quelqu'un ou un terme
+  skills:
+    create:
+      failure: La compétence n'a pas pu être ajoutée
+      success: La compétence %{name} a bien été ajoutée
+    destroy:
+      failure: La compétence n'a pas pu être supprimée
+      success: La compétence %{name} a bien été supprimée
+    form:
+      add_skill: Ajouter compétence
+      search_skill_by_name: Recherche par nom
+      select_skill: Ajouter compétence
+  validators:
+    internal_id_format: doit avoir un format valide.
+    phone_format: doit être au format international. p.ex. +33 123456789
+    picture_dimensions: "dimensions trop petites. Largeur min.: 180px, hauteur min.: 180px"
+    valid_twitter: doit être un nom d'utilisateur Twitter valide
+    url_format: doit être un lien valide au format %{url_format}
+  welcome:
+    index:
+      join: Rejoindre %{app_name}
+      search: Search
+      search_for_anyone_anything: Recherchez quelqu'un ou un terme
+      sign_in: Se connecter
+      welcome_to: Bienvenue sur

@@ -1,0 +1,41 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <%= link_to image_tag("logo.svg", width: 100), "/", class: "navbar-brand", id: "logo" %>
+    </div>
+    <% ! if user_signed_in? %>
+      <div id="header-navbar" class="collapse navbar-collapse">
+        <%= form_for :search, url: users_path, method: :get, html: { class: 'navbar-form navbar-left', id: "user_search" } do |f| %>
+          <div id="search-field" class="input-group header-search">
+            <%= f.hidden_field :term, value: params["search"].try(:[], "term") %>
+            <%= f.text_field :autocomplete, class: 'form-control', placeholder: (t '.search_for_anyone_anything') %>
+          </div>
+          <ul id="search-results" class="list-group"></ul>
+        <% end %>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class=""><%= current_user.full_name %></span>
+              <ul class="dropdown-menu">
+                <li><%= link_to (t '.profile'), current_user %></li>
+                <li><%= link_to (t '.graph_view'), organigraph_path(current_user) %></li>
+                <li><%= link_to (t '.settings'), edit_user_registration_path %></li>
+                <li>
+                  <%= link_to(destroy_user_session_path, method: :delete) do %>
+                    <h4><span class="label label-warning">Sign out</span></h4>
+                  <% end %>
+                </li>
+                <% if current_user.admin? %>
+                  <li role="separator" class="divider"></li>
+                  <li><%= link_to (t '.admin'), rails_admin_path, style: "color: red" %></li>
+                  <li><%= link_to (t '.edit_mode', switch: policy(User).edit_mode ? 'ON' : 'OFF'), edit_mode_path, style: "color: red" %></li>
+                <% end %>
+              </ul>
+            </a>
+          </li>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+</nav>

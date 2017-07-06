@@ -1,0 +1,20 @@
+<% if user.external? %>
+  <div class="ribbon">
+    <div class="ribbon-inner"><span><%= t'.external' %></span></div>
+  </div>
+<% end %>
+<a class="profile-link" href="<%= url_for user %>">
+  <div class="profile-thumb">
+    <%= avatar(user, :medium, 'profile-thumb-img') %>
+  </div>
+  <h2 class="profile-title"><%= user.full_name %></h2>
+  <div class="profile-job">
+    <div><%= user.job_title %></div>
+  </div>
+  <div class="profile-legend"><%= user.entity %></div>
+</a>
+<% if current_user %>
+  <div class="profile-footer">
+    <%= render "relationships/create_dropdown", user: current_user, target: user %>
+  </div>
+<% end %>

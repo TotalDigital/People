@@ -1,0 +1,25 @@
+<h2 class="pod-title">Jobs</h2>
+<% @user.jobs.order("start_date desc").each do |job| %>
+  <div class="item">
+    <div class="item-header">
+      <% if policy(job).destroy? %>
+        <%= link_to "", [@user, job], method: :delete, class: 'pull-right glyphicon glyphicon-remove remove', remote: true %>
+      <% end %>
+      <h3 class="item-title">
+        <%= remote_input(job, :title, [@user, job]) %>
+      </h3>
+    </div>
+    <div class="item-body">
+      <div class="item-legend">
+        <%= render 'shared/inputs/remote_dates', item: job %>
+      </div>
+      <div class="item-legend">
+        <span class="glyphicon glyphicon-map-marker"></span>
+        <%= remote_input(job, :location, [@user, job]) %>
+      </div>
+      <div class="item-description">
+        <%= remote_input(job, :description, [@user, job], input_type: :text_area) %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,60 @@
+<div class="resume" data-controller="profile">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="resume-header pod">
+          <% if @user.external? %>
+            <div class="ribbon">
+              <div class="ribbon-inner"><span><%= t'.external' %></span></div>
+            </div>
+          <% end %>
+          <div style="margin-top: -120px;">
+            <div class="resume-header-thumb">
+              <div class="resume-header-thumb-inner" id="profile-photo">
+                <%= avatar(@user, :medium, "resume-header-thumb-inner-img center-block") %>
+              </div>
+              <div class="resume-header-thumb-action">
+                <% if policy(@user).update? %>
+                  <!-- Update Profile Picture -->
+                  <%= form_for :user, url: user_path(@user), method: :patch, html: { multipart: true, class: 'form-inline picture-form' } do |f| %>
+                    <div class="input-group input-group-sm center-block">
+                      <label class="input-group-btn">
+                  <span class="btn btn-default btn-sm">
+                    <span class="text"><%= t'.select_file' %></span> <%= f.file_field :profile_picture, required: true, accept: ("image/jpg,image/jpeg,image/png"), class: 'hidden' %>
+                  </span>
+                      </label>
+                      <span class="input-group-btn">
+                  <%= f.submit (t'.upload_new_picture'), class: 'btn btn-primary btn-sm' %>
+                </span>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+            <div class="resume-header-txt" id="main_information">
+              <%= render "main_information", user: @user %>
+            </div>
+          </div>
+        </div>
+        <div class="visible-xs-block u-mtS">
+          <%= render "contact_information", user: @user %>
+        </div>
+        <%= render "jobs" %>
+        <%= render "projects" %>
+      </div>
+      <div class="col-md-4">
+        <div class="hidden-xs" id="contact_information">
+          <%= render "contact_information", user: @user %>
+        </div>
+        <%= render "relations" %>
+        <%= render "skills" %>
+        <%= render "languages" %>
+        <%= render "degrees" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  <%= render "guided_tour.js" if params[:guided_tour] %>
+</script>

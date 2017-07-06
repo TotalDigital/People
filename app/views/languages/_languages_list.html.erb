@@ -1,0 +1,6 @@
+<% @user.languages.each do |language| %>
+  <span class="label label-info multiline removable">
+    <%= link_to_if policy(@user).update_profile?, "", [@user, language], method: :delete, class: 'glyphicon glyphicon-remove remove', remote: true %>
+    <%= link_to language.name, users_path(q: { languages_id_eq: language.id }) %>
+  </span>
+<% end %>

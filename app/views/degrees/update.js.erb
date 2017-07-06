@@ -1,0 +1,10 @@
+$("#flash-messages").html("<%= escape_javascript(render partial: 'shared/flash_messages') %>");
+$("#degrees").html("<%= escape_javascript(render partial: 'degrees/degrees_list', locals: { degrees: @user.degrees }) %>");
+
+$('#new_degree').each(function () {
+  this.reset();
+})
+
+$('#degree-form').collapse('hide');
+
+remoteInput();

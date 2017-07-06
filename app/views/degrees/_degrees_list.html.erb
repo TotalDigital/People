@@ -1,0 +1,11 @@
+<% @user.degrees.order(graduation_year: :desc).each do |degree| %>
+  <div class="well well-sm">
+    <b>
+      <%= remote_input(degree, :entry_year, [@user, degree]) %> -
+      <%= remote_input(degree, :graduation_year, [@user, degree]) %>
+    </b>
+    <%= link_to '', [@user, degree], method: :delete, class: 'glyphicon glyphicon-remove remove pull-right', remote: true if policy(degree).destroy? %><br>
+    <%= remote_input(degree, :title, [@user, degree]) %><br>
+    <%= degree.school.name %>
+  </div>
+<% end %>

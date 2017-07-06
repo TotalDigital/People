@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= t'.education' %></h3>
+  </div>
+  <div class="panel-body">
+
+    <div id="degrees">
+      <%= render partial: 'degrees/degrees_list', locals: { degrees: @user.degrees } %>
+    </div>
+
+    <% if policy(Degree.new(user: @user)).create? && policy(@user).update_profile? %>
+      <button id="add-degree-button" class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#degree-form" aria-expanded="false" aria-controls="degree-form">
+        <%= t'.add_degree' %>
+      </button>
+      <br><br>
+      <div class="collapse" id="degree-form">
+        <%= render 'degrees/form' %>
+      </div>
+    <% end %>
+
+  </div>
+</div>
+
+

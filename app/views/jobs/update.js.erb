@@ -1,0 +1,8 @@
+$("#flash-messages").html("<%= escape_javascript(render partial: 'shared/flash_messages') %>");
+$("#jobs").html("<%= escape_javascript(render partial: 'jobs/jobs_list', locals: { jobs: @user.jobs}) %>");
+
+$('#new_job').each(function () {
+  this.reset();
+});
+
+$('#job-form').collapse('hide');

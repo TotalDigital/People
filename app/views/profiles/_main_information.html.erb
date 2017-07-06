@@ -1,0 +1,17 @@
+<h1 class="resume-title">
+  <%= remote_input(user, :first_name, user) %>
+  <%= remote_input(user, :last_name, user) %>
+</h1>
+<div class="resume-job">
+  <%= remote_input(user, :job_title, user, label: t('profiles.form.job_title')) %>
+</div>
+<div class="u-mtXS">
+  <%= remote_input(user, :entity, user, label: t('profiles.form.entity')) %>
+</div>
+<div class="u-mtXS">
+  <span class="glyphicon glyphicon-map-marker"></span>
+  <%= remote_input(user, :office_address, user, label: t('profiles.form.office_address')) %>
+</div>
+<div class="u-mtS" id="profile-relationship-label">
+  <%= add_or_remove_relationship_button(current_user, user) %>
+</div>

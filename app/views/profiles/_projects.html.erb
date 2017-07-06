@@ -1,0 +1,20 @@
+<div class="pod u-mtS">
+  <h2 class="pod-title"><%= t'.projects' %></h2>
+
+  <div id="projects">
+    <%= render partial: 'projects/project_participations_list', locals: { project_participations: @user.project_participations } %>
+  </div>
+
+</div>
+
+<% if policy(ProjectParticipation.new(user_id: @user.id)).new? %>
+  <div class="u-mvS u-txtCenter">
+    <button id="add-project-button" class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#project-participation-form" aria-expanded="false" aria-controls="project-participation-form">
+      <span class="glyphicon glyphicon-plus"></span> <%= t'.add_project_participation' %>
+    </button>
+  </div>
+
+  <div class="collapse" id="project-participation-form">
+    <%= render partial: 'projects/form' %>
+  </div>
+<% end %>

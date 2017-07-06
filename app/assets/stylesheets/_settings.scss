@@ -1,0 +1,51 @@
+/** ======================================
+ * Custom
+ * ======================================= */
+
+$clr-divider: #ededed;
+$clr-1: #f39600;
+
+/** ======================================
+ * Bootstrap
+ * ======================================= */
+
+$brand-info: #fc961a;
+
+$gray-base: #212121;
+$brand-primary: #2f8be6;
+$body-bg: #fafafa;
+
+$navbar-height: 70px;
+$navbar-default-bg: #fff;
+$font-family-sans-serif: 'Roboto', sans-serif;
+
+$border-radius-small: 2px;
+$border-radius-base: 2px;
+$border-radius-large: 4px;
+
+$modal-inner-padding: 30px;
+
+$panel-body-padding: 20px;
+$panel-heading-padding: 20px;
+$panel-default-border: $clr-divider;
+$panel-inner-border: $clr-divider;
+$panel-default-heading-bg: #fff;
+
+$thumbnail-border: $clr-divider;
+$thumbnail-padding: 0;
+
+$state-success-text: #fff;
+$state-success-bg: #4caf50;
+$state-success-border: darken(adjust-hue($state-success-bg, -10), 5%) !default;
+
+$state-info-text: #fff;
+$state-info-bg: $brand-primary;
+$state-info-border: darken(adjust-hue($state-info-bg, -10), 7%) !default;
+
+$state-warning-text: #fff;
+$state-warning-bg: $brand-info;
+$state-warning-border: darken(adjust-hue($state-warning-bg, -10), 5%) !default;
+
+$state-danger-text: #fff;
+$state-danger-bg: #c62828;
+$state-danger-border: darken(adjust-hue($state-danger-bg, -10), 5%) !default;

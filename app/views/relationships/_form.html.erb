@@ -1,0 +1,30 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title"><%= t'.confirm' %></h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+    <%= form_for relationship, format: :js, remote: true do |f| %>
+      <div class="modal-body">
+        <%= modal_title(relationship.target.full_name, relationship.target.job_title) %>
+        <%= f.hidden_field :user_id, class: 'form-control', required: true %>
+        <%= f.hidden_field :target_id, class: 'form-control', required: true %>
+        <div class="list-group" style="margin-top: 30px">
+          <%= f.collection_radio_buttons :kind, Relationship.kinds, :first, :first do |b| %>
+            <% if policy(Relationship.new(user: relationship.user, target: relationship.target, kind: b.value)).kind_available? %>
+              <li class="list-group-item">
+                <%= content_tag :div, class: "radio" do %> 
+                  <%= b.label { b.radio_button + (t'.as_relation', relation: (t"helpers.relationships.kinds.#{b.value}")) } %>
+                <% end %>
+              </li>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"><%= t'.close' %></button>
+          <%= f.submit (t'.add'), class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

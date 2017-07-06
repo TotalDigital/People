@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= t'.languages' %></h3>
+  </div>
+  <div class="panel-body">
+
+    <div id="languages" class="tagBox">
+      <%= render partial: 'languages/languages_list', locals: { languages: @user.languages } %>
+    </div>
+
+    <% if policy(Language).create? && policy(@user).update_profile? %>
+      <div class="u-mtS">
+        <%= render partial: 'languages/form' %>
+      </div>
+    <% end %>
+  </div>
+</div>

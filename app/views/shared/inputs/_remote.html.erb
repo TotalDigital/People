@@ -1,0 +1,19 @@
+<span class="<%= js_class %>">
+  <% if display_as.present? %>
+    <%= display_as %>
+  <% elsif obj.send(attribute).present? %>
+    <%= content_tag :span, obj.send(attribute) %>
+  <% else %>
+    <%= label %>
+  <% end %>
+</span>
+
+<% if update_policy %>
+  <span class="<%= js_class %>">
+    <%= link_to "", "", class: "edit-link glyphicon glyphicon-pencil", data: { inputs_class: js_class } %>
+  </span>
+
+  <%= form_for url_objects, action: :update, format: :js, remote: true, html: {class: "hidden #{js_class}", style: "display: inline-block;"} do |f| %>
+    <%= f.send(input_type, attribute, class: "js-edit-field", placeholder: placeholder) %>
+  <% end %>
+<% end %>

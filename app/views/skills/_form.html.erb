@@ -1,0 +1,7 @@
+<%= form_for [@user, Skill.new], method: :post, class: 'form-inline', remote: true do |f| %>
+  <div class="form-group">
+    <%= f.hidden_field :id, prompt: (t'.select_skill'), class: 'form-control input-sm' %>
+    <%= f.autocomplete_field :name, autocomplete_skill_name_path, id_element: '#skill_id', class: 'form-control input-sm', placeholder: (t'.search_skill_by_name'), required: true %>
+  </div>
+  <%= f.submit (t'.add_skill'), class: 'btn btn-primary btn-sm', id: 'add-skill-button' %>
+<% end %>

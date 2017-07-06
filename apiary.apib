@@ -1,0 +1,663 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# Total People
+
+This document describes the API specifications for **Total People** application.
+
+# Technical orientations
+
+All messages, such as resources or status messages will be formated in JSON.
+
+API's authentication will be implemented with [Oauth 2.0](http://labs.hybris.com/2012/06/01/oauth2-authorization-code-flow/).
+ 
+This API will be HTTP [REST](http://fr.wikipedia.org/wiki/Representational_State_Transfer) compliant. The entire documentation is designed regarding this standard.
+
+## Allowed HTTPs requests:
+
+| Verbs     | Explanations                          |
+|-----------|---------------------------------------|
+| `PUT`     | To create resource                    |
+| `POST`    | Update resource                       |
+| `GET`     | Get a resource or list of resources   |
+| `DELETE`  | To delete resource                    |
+
+## HTTPs status codes
+
+| Codes                         | Explanations                                                                                                                              |
+|-------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| `200 OK`                      | Standard response for successful HTTP requests                                                                                            |
+| `201 Created`                 | The request has been fulfilled, resulting in the creation of a new resource                                                               |
+| `204 No Content`              | The server successfully processed the request and is not returning any content                                                            |
+| `400 Bad Request`             | There is a syntax error in the request, and it is denied                                                                                  |
+| `401 Unauthorized`            | The request header did not contain the necessary authentication codes, and the client is denied access                                    |
+| `403 Forbidden`               | The request was a valid request, but the server is refusing to respond to it                                                              |
+| `404 Not Found`               | The requested resource was not found                                                                                                      |
+| `409 Conflict`                | Indicates that the request could not be processed because of conflict in the request, such as model validations or transactionnal issues  |
+| `422 Unprocessable Entity`    | The request was well-formed but was unable to be followed due to semantic errors                                                          |
+| `500 Internal Server Error`   | A generic error message, given when an unexpected condition was encountered and no more specific message is suitable                      |
+| `503 Service Unavailable`     | The server is currently unavailable                                                                                                       |
+
+## Pagination
+
+### Parameters
+
+All responses of `array` type can be paginate. To do so, there's two optional args than can be passed to the request:
+ - `per_page` : the number of elements returned in one page. The default page size set to 20
+ - `page` : the offset of the returned page
+ 
+### Response
+All paginated responses will have these informations in the header:
+
+| Parameters        | Description                               |
+|-------------------|-------------------------------------------|
+| `X-Total`         | Number of resources returned              |
+| `X-Total-Pages`   | Number of max pages returned              |
+| `X-Per-Page`      | Number of resources returned by page      |
+| `X-Page`          | The current page offset                   |
+| `X-Next-Page`     | The next page offset                      |
+| `X-Prev-Page`     | The previous page offset                  |
+
+Here an example of the kind of header a paginated response will have:
+
+```
+GET http://api.people.total/api/v1/users?page=2&per_page=10
+
+Access-Control-Allow-Origin → *
+Access-Control-Request-Method → *
+Cache-Control → max-age=0, private, must-revalidate
+Content-Encoding → gzip
+Content-Type → application/json; charset=utf-8
+ETag → W/"0dbae43f186500f440d46380b2e7d135"
+Transfer-Encoding → chunked
+Vary → Accept-Encoding
+X-Next-Page → 3
+X-Page → 2
+X-Per-Page → 10
+X-Prev-Page → 1
+X-Request-Id → 7881324c-cd4c-498d-933f-f8e1dc9d2875
+X-Runtime → 0.027345
+X-Total → 32
+X-Total-Pages → 4
+```
+
+# Resources glossary
+
+Here the list of the resources the API can return. Resources names are used to specify the different routes that are compliants to the [REST](http://fr.wikipedia.org/wiki/Representational_State_Transfer) specifications.
+
+| Name          | Resource                  | Description                                                           |
+|---------------|---------------------------|-----------------------------------------------------------------------|
+| User          | `users`                   | User on the People Platform who owns an account (profile)             |
+| Project       | `projects`                | Project on what some users have been working on                       |
+| Participation | `project_partcipations`   | Describes the role of the user on a given project                     |
+| School        | `schools`                 | School or University that users have been studying                    |
+| Degree        | `degrees`                 | Degree that a user got in his scholarship                             |
+| Skill         | `skills`                  | User's skill                                                          |
+| Language      | `languages`               | User's language                                                       |
+| Job           | `jobs`                    | Any kind of work experience such as job, internship, past or present  |
+| Relationship  | `relationships`           | Describes the kind of relationship between 2 users                    |
+
+
+# OAuth implementation
+
+`application_id` et `application_secret` must be set by a People user who has the admin role granted, from the route `/oauth/applications`.
+
+The People admin user can create the OAuth application from this page. Some information such as callback URL or user's scopes will be filled to create the applicaton.
+
+Access tokens will be valid for 2 hours. This can be changed later in the Total application settings.
+ 
+Note: Once you have a expired oauth token, you should play that request again but with different parameters ie request body should be:
+
+```
+{
+    "app_id":"e62dd217f1e69cbcf4d76....",
+    "app_secret":"3d76769bc580fe36f....",
+    "grant_type":"refresh_token",
+    "refresh_token":"ae476053a5d6df9f4f...."
+}
+```
+
+Here's some useful resources about OAuth:
+ * http://oauth.net/2/
+ * https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2
+
+# OAuth [/oauth/token]
+
+## Get a token [POST]
+
++ Request (application/json)
+    + Body
+
+            {
+                "app_id":"78e646e106fdac64c4d35449b36c258f8a704af14bd654d58ff767b73cece63b",
+                "app_secret":"388bb49ef8adc8015427daf742523d621bf86f46961f076842abf0d2951e1f7f",
+                "code":"cbb09ce4e44b002a419a47b2295c9421bee70a5bcfd8b09dd6ea725d1afaf292",
+                "redirect_uri":"urn:ietf:wg:oauth:2.0:oob",
+                "grant_type":"authorization_code"
+            }
+
+
++ Response 200 (application/json)
+    + Body
+
+            {
+              "access_token": "9d62f03b78409e3053a85e66d53af4ccbc29743910ca0bc53ece03007428ee25",
+              "token_type": "bearer",
+              "expires_in": 2592000,
+              "refresh_token": "01504806d5998aa035918a20fdc73eb81e4da9d4a6eba3d3de3bddbd153148a8",
+              "created_at": 1490622057
+            }
+
+
+# Users [/api/v1/users{?page}{?per_page}]
+
++ Parameters
+    + page (optional, number, `1`) ... The page of users to return
+    + per_page (optional, number, `1`) ... The number of users to return by page
+
+## List of users [GET]
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[User])
+
+## Get the current user [GET /api/v1/users/profile]
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (User)
+
+## Get a user [GET /api/v1/users/{user_id}]
+
++ Parameters
+    + user_id (number, `1`) - ID of the user
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (User)
+
+## Upload a profile picture of a user [POST /api/v1/users/{user_id}/upload_picture]
+
++ Parameters
+    + user_id (number, `1`) - ID of the user
+    
++ Request (multipart/form)
+    + Attributes
+        + profile_picture: body
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (User)
+
+## Search for users [GET /api/v1/users/search/{search_term}]
+
++ Parameters
+    + search_term (string, `what you search`) - Terms of the search
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[User])
+
+
+# Projects [/api/v1/projects{?page}{?per_page}]
+
++ Parameters
+    + page (optional, number, `1`) ... The page of projects to return
+    + per_page (optional, number, `1`) ... The number of projects to return by page
+
+## List of projects [GET]
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[Project])
+
+## Get a projet [GET /api/v1/projects/{project_id}]
+
++ Parameters
+    + project_id (number, `1`) - ID of the project
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Project)
+
+## Update a project [PUT /api/v1/projects/{project_id}]
+
++ Parameters
+    + project_id (number, `1`) - ID of the project
+    
++ Request (application/json)
+    + Body
+
+            {
+                "project":{
+                    "name":"People Total",
+                    "location":"Paris"
+                }
+            }
+    
+    + Attributes
+        + project (object)
+            + name (string, optional)
+            + location (string, optional)
+
++ Response 204
+
+## Search for projects [GET /api/v1/projects/search/{search_term}]
+
++ Parameters
+    + search_term (string, `what you search`) - Terms of the search
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[Project])
+
+
+# School [/api/v1/schools{?page}{?per_page}]
+
++ Parameters
+    + page (optional, number, `1`) ... The page of schools to return
+    + per_page (optional, number, `1`) ... The number of schools to return by page
+
+## List of schools [GET]
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[School])
+
+## Get a school [GET /api/v1/schools/{school_id}]
+
++ Parameters
+    + school_id (number, `1`) - ID of the school
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (School)
+
+## Search for schools [GET /api/v1/schools/search/{search_term}]
+
++ Parameters
+    + search_term (string, `what you search`) - Terms of the search
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[School])
+
+
+# Degree [/api/v1/degrees{?page}{?per_page}]
+
++ Parameters
+    + page (optional, number, `1`) ... The page of degrees to return
+    + per_page (optional, number, `1`) ... The number of degrees to return by page
+
+## List of degrees [GET]
+
++ Response 200 (application/json; charset=utf-8)
+
+    + Attributes (array[Degree])
+
+## Get a degree [GET /api/v1/degrees/{degree_id}]
+
++ Parameters
+    + degree_id (number, `1`) - ID of the degree
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Degree)
+
+## Update a degree [PUT /api/v1/degrees/{degree_id}]
+
++ Parameters
+    + degree_id (number, `1`) - ID of the degree
+    
++ Request (application/json)
+    + Body
+
+            {
+                "degree":{
+                    "title":"People Total",
+                    "entry_year":"2010",
+                    "graduation_year":"2012";
+                    "school_id":1
+                }
+            }
+    
+    + Attributes
+        + degree (object)
+            + title (string, optional)
+            + entry_year (string, optional)
+            + graduation_year (string, optional)
+            + school_id (number, optional)
+
++ Response 204
+
+## Delete a degree [DELETE /api/v1/degrees/{degree_id}]
+
++ Parameters
+    + degree_id (number, `1`) - ID of the degree
+
++ Response 204
+
+
+# Skill [/api/v1/skills{?page}{?per_page}]
+
++ Parameters
+    + page (optional, number, `1`) ... The page of skills to return
+    + per_page (optional, number, `1`) ... The number of skills to return by page
+
+## List of skills [GET]
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[Skill])
+
+## Get a skill [GET /api/v1/skills/{skill_id}]
+
++ Parameters
+    + skill_id (number, `1`) - ID of the skill
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Skill)
+    
+## Create a skill [POST /api/v1/skills]
+
++ Request (application/json)
+    + Body
+
+            {
+                "skill":{
+                    "name":"digital"
+                }
+            }
+    
+    + Attributes
+        + skill (object)
+            + name (string, required)
+
++ Response 201 (application/json; charset=utf-8)
+    - Attributes
+        - skill (Skill)
+
+## Search for skills [GET /api/v1/skills/search/{search_term}]
+
++ Parameters
+    + search_term (string, `what you search`) - Terms of the search
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[Skill])
+
+
+# Language [/api/v1/languages{?page}{?per_page}]
+
++ Parameters
+    + page (optional, number, `1`) ... The page of languages to return
+    + per_page (optional, number, `1`) ... The number of languages to return by page
+
+## List of languages [GET]
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[Language])
+
+## Get a language [GET /api/v1/languages/{language_id}]
+
++ Parameters
+    + language_id (number, `1`) - ID of the language
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Language)
+
+## Create a language [POST /api/v1/languages]
+
++ Request (application/json)
+    + Body
+
+            {
+                "language":{
+                    "name":"french"
+                }
+            }
+    
+    + Attributes
+        + language (object)
+            + name (string, required)
+
++ Response 201 (application/json; charset=utf-8)
+    - Attributes
+        - language (Language)
+
+## Search for languages [GET /api/v1/languages/search/{search_term}]
+
++ Parameters
+    + search_term (string, `what you search`) - Terms of the search
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[Language])
+
+
+# Job [/api/v1/jobs{?page}{?per_page}]
+
++ Parameters
+    + page (optional, number, `1`) ... The page of jobs to return
+    + per_page (optional, number, `1`) ... The number of jobs to return by page
+
+## List of jobs [GET]
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[Job])
+
+## Get a job [GET /api/v1/jobs/{job_id}]
+
++ Parameters
+    + job_id (number, `1`) - ID of the job
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Job)
+
+## Create a job [POST /api/v1/jobs]
+
++ Request (application/json)
+    + Body
+
+            {
+                "job":{
+                    "title":"IT Tech Lead",
+                    "start_date":"2012/10/01",
+                    "end_date":"2016/12/10",
+                    "desccription":"Doing stuff",
+                    "location":"Paris",
+                    "user_id":"1"
+                }
+            }
+    
+    + Attributes
+        + job (object)
+            + title: IT Tech Lead (string, required)
+            + start_date: 2012/10/01 (string, required)
+            + end_date: 2016/12/10 (string, optional)
+            + desccription: Doing stuff (string, required)
+            + location: Paris (string, required)
+            + user_id: 1 (number, required)
+
++ Response 201 (application/json; charset=utf-8)
+    - Attributes
+        - job (Job)
+
+## Update a job [PUT /api/v1/jobs/{job_id}]
+
++ Parameters
+    + job_id (number, `1`) - ID of the job
+    
++ Request (application/json)
+    + Body
+
+            {
+                "job":{
+                    "title":"IT Engineer",
+                    "start_date":"2010/01/01"
+                }
+            }
+    
+    + Attributes
+        + job (object)
+            + title (string, optional)
+            + start_date (string, optional)
+
++ Response 204
+
+## Delete a job [DELETE /api/v1/jobs/{job_id}]
+
++ Parameters
+    + job_id (number, `1`) - ID of the job
+
++ Response 204
+
+
+# Relationship [/api/v1/relationships{?page}{?per_page}]
+
++ Parameters
+    + page (optional, number, `1`) ... The page of relationships to return
+    + per_page (optional, number, `1`) ... The number of relationships to return by page
+
+## List of relationships [GET]
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (array[Relationship])
+
+## Get a relationship [GET /api/v1/relationships/{relationship_id}]
+
++ Parameters
+    + relationship_id (number, `1`) - ID of the relationship
+
++ Response 200 (application/json; charset=utf-8)
+    + Attributes (Relationship)
+
+## Create a relationship [POST /api/v1/relationships]
+
++ Request (application/json)
+    + Body
+
+            {
+                "relationship":{
+                    "user_id":"1",
+                    "target_id":"2",
+                    "kind":"is_colleague_of"
+                }
+            }
+    
+    + Attributes
+        + relationship (object)
+            + user_id (number, required)
+            + target_id (number, required)
+            + kind (string, required)
+
++ Response 201 (application/json; charset=utf-8)
+    - Attributes
+        - relationship (Relationship)
+
+## Delete a relationship [DELETE /api/v1/relationships/{relationship_id}]
+
++ Parameters
+    + relationship_id (number, `1`) - ID of the relationship
+
++ Response 204
+
+
+# Data Structures
+
+## User (object)
+- id: 1 (number, required)
+- email: somebody@total.com (string, required)
+- internal_id: J0123456 (string, required)
+- slugged_id: johndoe (string, required)
+- first_name: John (string, required)
+- last_name: Doe (string, required)
+- phone: +33 612345789 (string, optional)
+- job_title: IT Engineer (string, optional)
+- office_address: 1 Rue de Rivoli 75004 Paris (string, optional)
+- entity: ABD/DEF/GHI (string, optional)
+- external: true (boolean, required)
+- linkedin: https://www.linkedin.com/in/username/ (string, optional)
+- twitter: @username (string, optional)
+- wat_link: http://wat-my.corp.local/Person.aspx?accountname=abc (string, optional)
+- picture_url: http://placehold.it/180x180 (string, optional)
+- relationships (array[Relationship])
+- jobs (array[Job])
+- projects (array[Project])
+- skill (array[Skill])
+- languages (array[Language])
+- degrees (array[Degree])
+
+## Graph Parent Element (object)
+- id: 1 (number, required)
+- name: John Doe (string, required)
+- picture_url: http://placehold.it/180x180 (string, required)
+- children (array[Graph Child Element])
+
+## Graph Child Element (object)
+- id: 1 (number, required)
+- name: John Doe (string, required)
+- picture_url: http://placehold.it/180x180 (string, required)
+
+## Project (object)
+- id: 1 (number, required)
+- name: Projet People Total (string, required)
+- location: Paris (string, required)
+- project_participations (array[Project Participation Without Project])
+
+## Project Participation Without Project (object)
+- id: 1 (number, required)
+- start_date: 2016/10/10 (string, required)
+- end_date: 2016/12/10 (string, optional)
+- role_description: Was in charge of doing stuff (string, required)
+- user_id: 2 (number, required)
+- user_first_name: John (string, required)
+- user_last_name: Doe (string, required)
+- user_picture_url: http://placehold.it/180x180 (string, required)
+- job_title: IT Engineer (string, optional)
+- project_owner: true (boolean, required)
+
+## Project Participation (object)
+- id: 1 (number, required)
+- start_date: 2016/10/10 (string, required)
+- end_date: 2016/12/10 (string, optional)
+- role_description: Was in charge of doing stuff (string, required)
+- user_id: 2 (number, required)
+- user_first_name: John (string, required)
+- user_last_name: Doe (string, required)
+- user_picture_url: http://placehold.it/180x180 (string, required)
+- job_title: IT Engineer (string, optional)
+- project_owner: true (boolean, required)
+- project (Project Without Participants, required)
+
+## Project Without Participants (object)
+- id: 1 (number, required)
+- name: Projet People Total (string, required)
+- location: Paris (string, required)
+
+## School (object)
+- id: 1 (number, required)
+- name: HEC Paris (string, required)
+
+## Degree (object)
+- id: 1 (number, required)
+- title: Master Professionnel (string, required)
+- entry_year: 2010 (number, required)
+- graduation_year: 2012 (number, required)
+- user_id: 1 (number, required)
+- school (School, required)
+
+## Skill (object)
+- id: 1 (number, required)
+- name: digital (string, required)
+
+## Language (object)
+- id: 1 (number, required)
+- name: french (string, required)
+
+## Job (object)
+- id: 1 (number, required)
+- title: IT Tech Lead (string, required)
+- start_date: 2012/10/01 (string, required)
+- end_date: 2016/12/10 (string, optional)
+- desccription: Doing stuff (string, required)
+- location: Paris (string, required)
+- user_id: 1 (number, required)
+
+## Relationship (object)
+- id: 1 (number, required)
+- kind: Manager of (string, required)
+- source (User Relationship, required)
+- target (User Relationship, required)
+
+## User Relationship (object)
+- id: 1 (number, required)
+- first_name: John (string, required)
+- last_name: Doe (string, required)
+- picture_url: http://placehold.it/180x180 (string, required)
+- job_title: IT Engineer (string, required)

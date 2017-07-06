@@ -1,0 +1,26 @@
+<div class="boxWrapper">
+  <div class="box">
+    <div class="box-header">
+      <h1 class="box-title"><%= t'devise.passwords.choose_your_password' %></h1>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+        <div class="box-body">
+          <%= f.hidden_field :reset_password_token %>
+
+          <div class="form-group">
+            <%= f.label :password, (t'devise.passwords.new_password') %><br />
+            <%= f.password_field :password, autofocus: true, autocomplete: "off", class: 'form-control' %>
+          </div>
+        </div>
+        <div class="box-footer">
+          <div>
+            <%= render "devise/shared/links" %>
+          </div>
+          <div>
+            <%= f.submit (t'devise.passwords.choose_my_password'), class: 'btn btn-primary'%>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>

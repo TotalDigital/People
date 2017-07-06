@@ -1,0 +1,16 @@
+<span class="display-dates">
+  <span class="glyphicon glyphicon-calendar"></span>
+  <%= formatted_start_date(item.start_date) %>
+  <%= formatted_end_date(item.end_date) %>
+</span>
+
+<span class="update-dates hidden">
+  <%= form_for [@user, item], format: :js, remote: true do |f| %>
+    <%= render 'shared/inputs/dates', f: f %>
+    <%= f.submit "ok", class: "js-submit-dates btn btn-primary btn-sm" %>
+  <% end %>
+</span>
+
+<% if policy(item).update? %>
+  <a class="edit-link js-edit-<%= item.class.to_s.parameterize %>-dates glyphicon glyphicon-pencil"></a>
+<% end %>

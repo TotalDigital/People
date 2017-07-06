@@ -1,0 +1,9 @@
+<% if flash[:alert] %>
+  $('#flash-error').hide();
+  $('#error-message').empty();
+  $('#error-message').append("<%= flash[:alert] %>");
+  $('#flash-error').show();
+<% else %>
+  $('#modal-window').modal('toggle');
+  $('#modal-window').html("<%= escape_javascript(render 'form', relationship: @relationship)%>");
+<% end %>

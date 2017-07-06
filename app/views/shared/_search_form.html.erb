@@ -1,0 +1,8 @@
+<%= form_for :search, url: users_path, method: :get do |f| %>
+  <div class="input-group">
+    <%= f.text_field :term, class: 'input-lg form-control search-text-lg', placeholder: (t'.search_for_anyone_anything'), value: params["search"].try(:[], "term") %>
+    <span class="input-group-btn">
+      <%= f.submit (t'.search'), class: 'btn btn-primary btn-lg' %>
+    </span>
+  </div>
+<% end %>

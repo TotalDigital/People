@@ -1,0 +1,6 @@
+<p><%= t'.welcome' %> <%= @user.full_name %>,</p>
+
+<p><%= t'.invited_to_app', app_name: People.app_name, app_owner: People.app_owner %></p>
+<p><%= t'.choose_password' %></p>
+
+<p><%= link_to (t'.access_account'), confirmation_url(@user, confirmation_token: @token) %></p>

@@ -1,0 +1,70 @@
+<div class="boxWrapper">
+
+  <div class="box">
+
+    <div class="box-header">
+      <h1 class="box-title"><%= t'.quetions_before_you_go' %></h1>
+    </div>
+
+    <!-- Do not display this block until we'll be able to connect with Linkedin -->
+    <% if false %>
+      <div class="box-body box-body--alternate">
+        <h2 class="box-subTitle"><%= t'.import_linkedin_profile' %></h2>
+        <% if @user.linkedin_uid? %>
+            <span class="label label-success">
+              <%= t'.profile_imported' %> <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            </span>
+        <% else %>
+          <div class="actions">
+            <%= link_to (t'.import_profile'), user_omniauth_authorize_path("linkedin"), class: "btn btn-default btn-sm" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= form_for @user do |f| %>
+      <div class="box-body">
+        <div class="form-group">
+          <%= f.label :job_title, (t'.whats_your_job_title') %><br/>
+          <%= f.text_field :job_title, autofocus: true, class: 'form-control', placeholder: (t'.placeholders.job_title') %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :entity, (t'.whats_your_entity') %><br/>
+          <%= f.text_field :entity, class: 'form-control', placeholder: (t'.placeholders.entity') %>
+        </div>
+
+        <% if People.contact_info_attributes.include?(:internal_id) %>
+          <div class="form-group">
+            <%= f.label :internal_id, (t'.whats_your_internal_id') %>
+            <small><%= t'.internal_id_notice' %></small>
+            <%= f.text_field :internal_id, class: 'form-control', placeholder: (t'.placeholders.entity'), required: true %>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= f.label :profile_picture, (t'.upload_profile_picture') %><br/>
+          <% if @user.profile_picture.blank? %>
+            <label>
+            <span class="btn btn-default">
+              <span class="text"><%= t'.select_file' %></span> <%= f.file_field :profile_picture, class: 'hidden' %>
+            </span>
+            </label>
+          <% else %>
+            <%= image_tag @user.profile_picture.url(:medium), class: 'img-responsive img-thumbnail' %>
+          <% end %>
+        </div>
+
+        <%= hidden_field_tag :onboarding, value: true %>
+      </div>
+      <div class="box-footer">
+        <div></div>
+        <div>
+          <%= f.submit (t'.save_and_continue'), class: 'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+
+</div>

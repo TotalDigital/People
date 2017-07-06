@@ -1,0 +1,17 @@
+<div class="skills panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= t'.skills' %></h3>
+  </div>
+  <div class="panel-body">
+
+    <div id="skills" class="tagBox">
+      <%= render partial: 'skills/skills_list', locals: { skills: @user.skills } %>
+    </div>
+
+    <% if policy(Skill).create? && policy(@user).update_profile? %>
+      <div class="u-mtS">
+        <%= render partial: 'skills/form' %>
+      </div>
+    <% end %>
+  </div>
+</div>

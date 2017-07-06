@@ -1,0 +1,303 @@
+---
+en:
+  admin:
+    actions:
+      import_users:
+        breadcrumb: Import
+        menu: Import
+        title: Import
+      import_jobs:
+        breadcrumb: Import
+        menu: Import
+        title: Import
+  date:
+    formats:
+      month_and_year: '%B %Y'
+    from: From
+    to: to
+    unknow: unknown date
+    current: current
+  degrees:
+    create:
+      failure: Unable to add degree
+      success: Successfully added degree
+    destroy:
+      failure: Unable to remove degree
+      success: Removed degree %{title}
+    form:
+      degree_title: Title
+      entry_year: Entry year
+      graduation_year: Graduation year
+      school: School
+      search_school_by_name: Search by name
+      submit_degree: Save degree
+    update:
+      success: Degree successfully updated
+      failure: Degree could not be updated
+  helpers:
+    application:
+      close: Close
+    page_entries_info:
+      more_pages:
+        display_entries: Displaying %{entry_name} <b>
+      one_page:
+        display_entries:
+          one: Displaying <b>1</b> %{entry_name}
+          other: Displaying <b>all %{count}</b> %{entry_name}
+          zero: No %{entry_name} found
+    relationships:
+      add_relation: Add relation
+      add_relation_with: Add %{person}
+      kinds:
+        is_assistant_of: assistant of
+        is_assisted_by: my assistant
+        is_colleague_of: colleague
+        is_managed_by: manager
+        is_manager_of: member of my team (N-1)
+      labels:
+        is_assistant_of: Assistant of
+        is_assisted_by: Assistant
+        is_colleague_of: Colleague
+        is_managed_by: Manager
+        is_manager_of: Member of my team (N-1)
+      remove_relation: Remove relation
+  jobs:
+    create:
+      failure: Unable to add job
+      success: Successfully added job %{title}
+    destroy:
+      success: Removed job %{title}
+    form:
+      dates: Dates
+      description: Description
+      end_date: End date
+      job_description: Job description
+      job_location: Job location
+      job_title: Title
+      location: Location
+      new_job_title: New job title
+      start_date: Start date
+      submit_job: Save job
+    update:
+      failure: Could not update job
+      success: Job successfully updated
+    import_list:
+      success:
+        zero: No job was imported
+        one: 1 job was imported
+        other: "%{count} were successfully imported"
+      failure: Jobs could not be imported
+      select_file: Please select a file
+  guided_tour:
+    welcome_title: Welcome to %{app_name}
+    welcome_content: Let's take a tour of the basics. Click on the blue pencils to edit fields.
+    jobs_title: Jobs Section
+    jobs_content: Add some work experiences here.
+    projects_title: Projects Section
+    projects_content: Find a project you worked on and add your participation or add a new project.
+    relations_title: Relations section
+    relations_content: Look for people you work with and choose relationship type.
+    skills_title: Skills section
+    skills_content: Search for a skill and add it to your profile.
+    languages_title: Languages section
+    languages_content: Search for a language and add it to your profile.
+    education_title: Education section
+    education_content: Add your degrees here.
+    search_title: Search
+    search_content: You can search people by anything (languages, skills, projects,...)
+  language:
+    en: English
+    fr: French
+  languages:
+    create:
+      failure: Unable to add language
+      success: Added language %{language}
+    destroy:
+      failure: Language could not be removed
+      success: Removed language %{language}
+    form:
+      search_language_by_name: Search by name
+      select_language: Select a language
+      submit_language: Add language
+  onboarding:
+    index:
+      import_linkedin_profile: Import Linkedin Profile
+      import_profile: Import Profile
+      internal_id_notice: internal ID will not be available publicly
+      profile_imported: Profile imported
+      quetions_before_you_go: A few questions before you go
+      save_and_continue: Save and continue
+      select_file: Select file
+      upload_profile_picture: Upload a profile picture
+      whats_your_entity: What's your entity?
+      whats_your_internal_id: What's your internal ID ?
+      whats_your_job_title: What's your job title?
+      placeholders:
+        entity: e.g. EP/SCR/TF-DIGITAL
+        internal_id: e.g. J0123456
+        job_title: e.g. Project Manager
+  pagination:
+    first: "&laquo; First"
+    last: Last &raquo;
+    next: Next &rsaquo;
+    previous: "&lsaquo; Prev"
+    truncate: "&hellip;"
+  profiles:
+    search_results:
+      search_all_terms: Search all terms
+    contact_info_labels:
+      internal_id: internal ID
+      phone: Phone number
+      linkedin: LinkedIn profile
+      twitter: Twitter username
+      wat_link: WAT link
+      lync: Lync
+    contact_info_placeholders:
+      internal_id: J0123456
+      phone: "+33 6 12 34 56 78"
+      linkedin: "http://www.linkedin.com/"
+      twitter: "@username"
+      wat_link: ""
+      lync: Lync
+    degrees:
+      add_degree: Add degree
+      education: Education
+    destroy:
+      success: Your profile has been deleted
+      failure: Your profile could not be deleted
+    form:
+      job_title: Job title
+      entity: Entity
+      office_address: Office address
+    import_list:
+      failure: Users could not be imported
+    index:
+      entity: Entity
+      first_name: First name
+      job_title: Job title
+      language: Language
+      last_name: Last name
+      location: Location
+      no_results_found: No results found
+      search: Search
+      search_results: Results for %{term}
+      filters: search by filters
+      show_filters: Show/Hide filters
+      skill: Skill
+    informations:
+      contact_information: Contact information
+    jobs:
+      add_job: Add job
+    languages:
+      languages: Languages
+    profile:
+      external: External
+    projects:
+      add_project_participation: Add project participation
+      projects: Projects
+    relations:
+      add: Add
+      add_a_relation: Add a relation
+      advanced_search: Advanced search
+      assistant: Assistant
+      assistant_of: Assistant of
+      colleagues: Colleagues
+      graph_view: Graph view
+      managers: Managers
+      relations: Relations
+      search_user_by_name: Search by name
+      team_members: Team Members
+    show:
+      entity: Entity
+      external: External
+      first_name: First name
+      job_title: Job title
+      last_name: Last name
+      office_address: Office address
+      select_file: Select file
+      upload_new_picture: Upload new picture
+    skills:
+      skills: Skills
+    update:
+      failure: Profile could not be updated
+      success: Profile successfully updated
+  project_participations:
+    create:
+      failure: Could not add new project
+      success: Added participation to project %{name}
+    destroy:
+      failure: Could not remove project %{name}
+      success: Removed project %{name}
+    update:
+      failure: Failed to update project
+      success: Project successfully updated
+  projects:
+    form:
+      dates: Dates
+      project_end_date: End date
+      project_location: Location
+      project_start_date: Start date
+      role_description: Role description
+      save_project_participation: Save project participation
+      search_project_by_name: Search by project's name or create a new one
+    project_participations_list:
+      project_members: Project members
+    update:
+      failure: Failed to update project
+      success: Project successfully updated
+  relationships:
+    create:
+      failure: Unable to add this relationship
+      success: Added relationship with %{name}
+    create_dropdown:
+      add_a_relation: Add a relation
+      remove_relation: remove relation
+    destroy:
+      failure: Could not remove relationship with %{name}
+      success: Removed relationship with %{name}
+    form:
+      add: Add
+      as_relation: As %{relation}
+      close: Close
+      confirm: Confirm new relationship
+    new:
+      failure: Please select a user before creating a relation
+  shared:
+    date:
+      inputs:
+        start_and_end_dates: Start and end dates
+    header:
+      admin: Admin
+      edit_mode: 'Edit Mode : %{switch}'
+      graph_view: Graph view
+      profile: Profile
+      search: Search
+      search_for_anyone_anything: Search for anyone and anything
+      settings: Settings
+    search_form:
+      search: Search
+      search_for_anyone_anything: Search for anyone and anything
+  skills:
+    create:
+      failure: Skill could not be added
+      success: Added skill %{name}
+    destroy:
+      failure: Skill could not be removed
+      success: Removed skill %{name}
+    form:
+      add_skill: Add skill
+      search_skill_by_name: Search by name
+      select_skill: Select a skill
+  validators:
+    internal_id_format: must have a valid format.
+    phone_format: must be in international number format. ie +33 123456789
+    picture_dimensions: "dimensions are too small. Minimum width: 180px, minimum height: 180px"
+    valid_twitter: must be a valid Twitter username
+    url_format: must be a valid URL with format %{url_format}
+  welcome:
+    index:
+      join: Join %{app_name}
+      search: Search
+      search_for_anyone_anything: Search for anyone and anything
+      sign_in: Sign in
+      welcome_to: Welcome to

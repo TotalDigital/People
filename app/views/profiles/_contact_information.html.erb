@@ -1,0 +1,11 @@
+<div class="panel panel-default" id="profile-contact">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= t'.contact_information' %></h3>
+  </div>
+  <div class="panel-body">
+    <p><%= mail_to @user.email %></p>
+    <% UserDecorator::CONTACT_INFO_ATTRIBUTES.each do |attribute| %>
+      <p><%= contact_info_input(@user, attribute, policy(@user).update_attribute?(attribute)) %></p>
+    <% end %>
+  </div>
+</div>

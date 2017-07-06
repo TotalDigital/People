@@ -1,0 +1,45 @@
+<div class="boxWrapper">
+  <div class="box">
+
+    <div class="box-header">
+      <h1 class="box-title"><%= t'devise.registrations.join' %> <%= app_title %></h1>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <div class="box-body">
+        <div class="form-group">
+          <%= f.label :email %><br>
+          <%= f.text_field :email, autofocus: true, class: 'form-control', required: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :first_name %>
+          <%= f.text_field :first_name, class: 'form-control', required: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :last_name %>
+          <%= f.text_field :last_name, class: 'form-control', required: true %>
+        </div>
+
+        <div class="form-group">
+          <%= f.check_box :conditions_of_use, :as => :boolean, inline_label: true, label: false, required: true %>
+          <%= f.label :conditions_of_use do
+            "#{t'devise.registrations.i_agree'} #{link_to (t'devise.registrations.terms_and_conditions'), '/conditions_of_use', target: '_blank'}".html_safe
+          end %>
+        </div>
+
+      </div>
+
+      <div class="box-footer">
+        <div>
+          <%= render "devise/shared/links" %>
+        </div>
+        <div>
+          <%= f.submit (t'devise.registrations.sign_up'), class: 'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,19 @@
+version: '2'
+services:
+  db:
+    image: postgres:9.4
+    environment:
+      POSTGRES_USER: 'justone'
+    ports:
+      - '5432:5439'
+  web:
+    build: .
+    command: bundle exec rails s -p 3009 -b '0.0.0.0'
+    environment:
+      POSTGRESQL_HOST: 'db'
+    volumes:
+      - .:/justone-poc-docker
+    ports:
+      - "3009:3009"
+    depends_on:
+      - db

@@ -1,0 +1,6 @@
+<% if user.relationship_with(target) %>
+    <div class="profile-tag"><%= relationship_labels(user.relationship_with(target).kind) %></div>
+  <%= link_to (t'.remove_relation'), user.relationship_with(target), method: :delete, remote: true, format: :js unless defined?(delete_btn) && delete_btn == false %>
+<% elsif policy(Relationship.new(user: user, target: target)).create? %>
+  <%= link_to (t'.add_a_relation'), new_relationship_path(relationship: { user_id: user.id, target_id: target.id }), {class: 'btn btn-default', remote: true } %>
+<% end %>

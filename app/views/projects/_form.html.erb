@@ -1,0 +1,28 @@
+<%= form_for [@user, ProjectParticipation.new], method: :post, remote: true do |f| %>
+  <div class="create panel project panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="form-group col-md-8">
+          <%= f.hidden_field :project_id %>
+          <%= f.autocomplete_field :project_name, autocomplete_project_name_path,
+                                   update_elements: { id: '#project_participation_project_id', location: '#project_participation_project_location' },
+                                   class: 'form-control input-sm',
+                                   placeholder: (t'.search_project_by_name'), required: true %>
+        </div>
+        <div class="form-group col-md-4">
+          <%= f.text_field :project_location, class: 'form-control input-sm', placeholder: (t'.project_location'), required: true %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-12">
+          <%= f.label :start_date, (t'.dates') %><br>
+          <%= render "shared/inputs/dates", f: f %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.text_area :role_description, class: 'form-control input-sm', placeholder: (t'.role_description'), required: true %>
+      </div>
+      <%= f.submit (t'.save_project_participation'), class: 'btn btn-primary btn-sm js-submit-project' %>
+    </div>
+  </div>
+<% end %>

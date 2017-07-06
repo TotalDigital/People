@@ -1,0 +1,7 @@
+<%= form_for [@user, Language.new], method: :post, class: 'form-inline', remote: true do |f| %>
+  <div class="form-group">
+    <%= f.hidden_field :id, prompt: (t'.select_language'), class: 'form-control input-sm' %>
+    <%= f.autocomplete_field :name, autocomplete_language_name_path, id_element: '#language_id', class: 'form-control input-sm', placeholder: (t'.search_language_by_name'), required: true %>
+  </div>
+  <%= f.submit (t'.submit_language'), class: 'btn btn-primary btn-sm', id: 'add-language-button' %>
+<% end %>

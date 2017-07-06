@@ -1,0 +1,6 @@
+<% skills.each do |skill| %>
+  <span class="label label-info multiline removable">
+    <%= link_to_if policy(@user).update_profile?, "", [@user, skill], method: :delete, class: 'glyphicon glyphicon-remove remove', remote: true %>
+    <%= link_to skill.name, users_path(q: { skills_id_eq: skill.id }) %>
+  </span>
+<% end %>

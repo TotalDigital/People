@@ -1,0 +1,68 @@
+$(document).ready(function () {
+  var tour = {
+    id: 'first_visit_user',
+    steps: [
+      {
+        target: 'start-tour',
+        title: '<%= t'guided_tour.welcome_title', app_name: People.app_name %>',
+        content: '<%= t'guided_tour.welcome_content' %>',
+        placement: 'right',
+        arrowOffset: 'top'
+      },
+      {
+        target: 'add-job-button',
+        title: '<%= t'guided_tour.jobs_title' %>',
+        content: '<%= t'guided_tour.jobs_content' %>',
+        placement: 'top',
+        xOffset: 'center',
+        arrowOffset: 'center'
+      },
+      {
+        target: 'add-project-button',
+        title: '<%= t'guided_tour.projects_title' %>',
+        content: '<%= t'guided_tour.projects_content' %>',
+        placement: 'top',
+        xOffset: 'center',
+        arrowOffset: 'center'
+      },
+      {
+        target: 'relation-form',
+        title: '<%= t'guided_tour.relations_title' %>',
+        content: '<%= t'guided_tour.relations_content' %>',
+        placement: 'left',
+        yOffset: 'center'
+      },
+      {
+        target: 'add-skill-button',
+        title: '<%= t'guided_tour.skills_title' %>',
+        content: '<%= t'guided_tour.skills_content' %>',
+        placement: 'left',
+        yOffset: 'center'
+      },
+      {
+        target: 'add-language-button',
+        title: '<%= t'guided_tour.languages_title' %>',
+        content: '<%= t'guided_tour.languages_content' %>',
+        placement: 'left',
+        yOffset: 'center'
+      },
+      {
+        target: 'add-degree-button',
+        title: '<%= t'guided_tour.education_title' %>',
+        content: '<%= t'guided_tour.education_content' %>',
+        placement: 'left',
+        yOffset: 'center'
+      },
+      {
+        target: 'search-field',
+        title: '<%= t'guided_tour.search_title' %>',
+        content: '<%= t'guided_tour.search_content' %>',
+        placement: 'bottom',
+        xOffset: 'center',
+        arrowOffset: 'center'
+      }
+    ]
+  };
+
+  hopscotch.startTour(tour);
+});

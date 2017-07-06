@@ -1,0 +1,3 @@
+<%= error_message(flash[:alert], "alert-danger", (flash[:details] || []) ) if flash[:alert] %>
+<%= error_message(flash[:notice], "alert-success", (flash[:details] || [])) if flash[:notice] %>
+

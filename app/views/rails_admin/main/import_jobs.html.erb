@@ -1,0 +1,15 @@
+<div class="col-sm-10">
+<h4>Import Jobs from CSV file</h4>
+</p>
+  Please name columns using the following strings (email, title, start_date, end_date, description, location)<br>
+  Dates must have following format 'dd/mm/yyyy'<br>
+  WARNING : Jobs will be imported only if user hasn't added own jobs yet.
+</p>
+  <%= form_for :jobs, url: main_app.import_jobs_path, class: "form-horizontal denser" do |f| %>
+    <div class="form-group">
+      <%= f.label :csv, "CSV File" %>
+      <%= f.file_field :csv, accept: ".csv" %>
+    </div>
+    <%= f.submit "Import jobs", class: "btn btn-primary" %>
+  <% end %>
+</div>

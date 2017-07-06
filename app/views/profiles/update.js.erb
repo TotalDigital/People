@@ -1,0 +1,4 @@
+$("#flash-messages").html("<%= escape_javascript(render partial: 'shared/flash_messages') %>");
+
+$("#main_information").html("<%= escape_javascript(render 'profiles/main_information', user: @user.reload) %>");
+$("#contact_information").html("<%= escape_javascript(render 'profiles/contact_information', user: @user.reload) %>");;

@@ -1,0 +1,194 @@
+/*
+  Container
+*/
+svg.peopleOrganigraph {
+  cursor: all-scroll;
+}
+
+.zoomContainer {
+  cursor: all-scroll;
+}
+
+/*
+  Organigraph
+*/
+.peopleOrganigraph-node {
+  cursor: pointer;
+
+  image:hover ~ .peopleOrganigraph-node-name {
+    display: block;
+    opacity: 1;
+    transform: translateY(65px);
+  }
+
+  &.is-root {
+    .peopleOrganigraph-node-name {
+      transform: translateY(100px);
+    }
+
+    image:hover ~ .peopleOrganigraph-node-name {
+      transform: translateY(85px);
+    }
+
+    .peopleOrganigraph-node-loadingIcon {
+      font-size: 70px;
+    }
+
+    .peopleOrganigraph-node-loadingIcon text {
+      transform: translateY(32px);
+    }
+  }
+
+  &.is-loading {
+    .peopleOrganigraph-node-loadingIcon {
+      display: block;
+    }
+  }
+}
+
+.peopleOrganigraph-node-name {
+  text-anchor: middle;
+  transition: .3s transform;
+  transform: translateY(80px);
+  opacity: 0;
+  transition: opacity .3s ease-in-out, transform .3s ease-in-out;
+  font-weight: 400;
+}
+
+.peopleOrganigraph-node-loadingIcon {
+  font-family: 'Glyphicons Halflings';
+  background: transparent;
+  text-anchor: middle;
+  font-size: 40px;
+  fill: white;
+  transform-origin: center center;
+  animation: 1.4s spin infinite ease-in-out;
+  width: 20px;
+  height: 20px;
+  display: none;
+}
+
+.peopleOrganigraph-node-loadingIcon text {
+  transform: translateY(18px);
+}
+
+.peopleOrganigraph-node-circle {
+  fill: white;
+  stroke: white;
+  stroke-width: 10px;
+
+  &.is-open {
+    stroke: rgb(23, 107, 193);
+    fill: rgb(23, 107, 193);
+  }
+}
+
+.peopleOrganigraph-link {
+  stroke: #72a4d8;
+  stroke-width: 2px;
+}
+
+/*
+  Organigraph User Card
+*/
+.peopleOrganigraph-userCard {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  width: 480px;
+  padding: 20px;
+  border: 1px solid #ededed;
+  border-radius: 2px;
+  background: #fff;
+  text-align: left;
+  display: flex;
+  box-shadow: 0 0 40px 0px rgba(0,0,0, .05);
+  min-height: 200px;
+}
+
+.peopleOrganigraph-userCard hr {
+  margin: 10px 0;
+}
+
+.peopleOrganigraph-userCard-avatar {
+  display: block;
+  height: 120px;
+  width: 120px;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 6px solid white;
+  flex-shrink: 0;
+  flex-grow: 0;
+  box-shadow: 0 0 15px 0 rgba(0,0,0, .1), 0 0 0 1px rgba(0,0,0, .05);
+}
+
+.peopleOrganigraph-userCard-avatar img {
+  width: 120px;
+  height: 120px;
+}
+
+.peopleOrganigraph-userCard-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 15px;
+  width: 100%;
+}
+
+.peopleOrganigraph-userCard-content-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.peopleOrganigraph-userCard-name {
+  color: #212121;
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.peopleOrganigraph-userCard-loader {
+  background: transparent;
+  vertical-align: middle;
+  color: #166ac1;
+  font-size: 16px;
+}
+
+.peopleOrganigraph-userCard-loader-text {
+  display: inline-block;
+  transform: translateY(2px);
+  margin-left: 5px;
+}
+
+.peopleOrganigraph-userCard-info {
+  margin: 0;
+  max-width: 250px;
+}
+
+.peopleOrganigraph-userCard-info--important {
+  text-transform: capitalize;
+}
+
+.peopleOrganigraph-userCard-info--secondary {
+  color: #767676;
+}
+
+.peopleOrganigraph-userCard-loader .glyphicon {
+  display: inline-block;
+  transform-origin: center center;
+  animation: 1.4s spin infinite ease-in-out;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+/*
+  Animations
+*/
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

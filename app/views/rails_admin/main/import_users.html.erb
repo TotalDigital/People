@@ -1,0 +1,14 @@
+<div class="col-sm-10">
+<h4>Import Users from CSV file</h4>
+</p>
+  Please name columns using the following strings (internal_id, email, last_name, first_name, job_title, entity, phone, address, address_2, postal_code, city, country, skills)<br>
+  Skills must be between quotation marks and separated by commas, for instance : "skill1, skill2, skill3" 
+</p>
+  <%= form_for :users, url: main_app.import_list_users_path, class: "form-horizontal denser" do |f| %>
+    <div class="form-group">
+      <%= f.label :csv, "CSV File" %>
+      <%= f.file_field :csv, accept: ".csv" %>
+    </div>
+    <%= f.submit "Import users", class: "btn btn-primary" %>
+  <% end %>
+</div>

@@ -1,0 +1,7 @@
+<p><%= t'.dear' %> <%= @resource.full_name %>,</p>
+
+<p><%= t'.account_locked' %></p>
+
+<p><%= t'.click_to_unlock' %></p>
+
+<p><%= link_to (t'.unlock_account'), unlock_url(@resource, unlock_token: @token) %></p>

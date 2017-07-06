@@ -1,0 +1,22 @@
+<%= form_for [@user, Degree.new], method: :post, class: 'form-inline', remote: true do |f| %>
+  <div class="form-group">
+    <%= f.label :title, (t'.degree_title') %>
+    <%= f.text_field :title, class: 'form-control input-sm', placeholder: (t'.degree_title') %>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      <%= f.label :school_name, (t'.school') %>
+      <%= f.hidden_field :school_id, class: 'form-control input-sm' %>
+      <%= f.autocomplete_field :school_name, autocomplete_school_name_path, id_element: '#degree_school_id', class: 'form-control input-sm', placeholder: (t'.search_school_by_name') %>
+    </div>
+    <div class="form-group col-md-6">
+      <%= f.label :entry_year, (t'.entry_year') %>
+      <%= f.select :entry_year, options_for_select((Time.now.year-100..Time.now.year).to_a.reverse), {}, {class: 'form-control input-sm'} %>
+    </div>
+    <div class="form-group col-md-6">
+      <%= f.label :graduation_year, (t'.graduation_year') %>
+      <%= f.select :graduation_year, options_for_select((Time.now.year-100..Time.now.year).to_a.reverse), {}, {class: 'form-control input-sm'} %>
+    </div>
+  </div>
+  <%= f.submit (t'.submit_degree'), class: 'btn btn-primary btn-sm' %>
+<% end %>
